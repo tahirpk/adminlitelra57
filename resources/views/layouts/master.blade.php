@@ -103,22 +103,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-power-off"></i>
+            <a href="{{ url('customer')}}" class="nav-link">
+              <i class="nav-icon fa fa-th"></i>
               <p>
-                Logout
+                Customers
+                
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ url('category')}}" class="nav-link">
               <i class="nav-icon fa fa-th"></i>
               <p>
-                Simple Link
+                Category
                 <span class="right badge badge-danger">New</span>
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('logout') }}" onclick="event.preventDefault();  document.getElementById('logout-form').submit();">
+              <i class="nav-icon fa fa-power-off"></i>
+              <p>{{ __('Logout') }}</p>
+            </a>
+
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  @csrf
+              </form>
+          </li>
+          
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -128,24 +140,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-   
-    <!-- /.content-header -->
+   <section class="content-header">
+     @yield('pageheader')
+   </section>
 
     <!-- Main content -->
-   
-    <!-- /.content -->
+    <section class="content container-fluid">
+
+     @yield('content')
+
+    </section>
   </div>
   <!-- /.content-wrapper -->
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-    <div class="p-3">
-      <h5>Title</h5>
-      <p>Sidebar content</p>
-    </div>
-  </aside>
+  
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
@@ -163,5 +171,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- REQUIRED SCRIPTS -->
 
 <script src="/js/app.js"></script>
+<script>
+  $(document).ready(function() {
+    $("#party_type").change(function() {
+      
+        var custmerCheck=$(this).val();
+        if(custmerCheck=='customer')
+        {
+          $( "#organization" ).prop( "disabled", true );
+          $( "#relation" ).prop( "disabled", true );
+        }
+        else
+        {
+          $( "#organization" ).prop( "disabled", false );
+          $( "#relation" ).prop( "disabled", false );
+        }
+    });
+
+    $('#editModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var title = button.data('title') 
+      var catid = button.data('cid')
+      var description = button.data('description')
+      var modal = $(this)
+      modal.find('.modal-title').text('Udate to ' + title +catid)
+      modal.find('.modal-body #title').val(title)
+      modal.find('.modal-body #description').val(description)
+      modal.find('.modal-body #cat_id').val(catid)
+    })
+
+
+  });
+</script>
+
 </body>
 </html>
