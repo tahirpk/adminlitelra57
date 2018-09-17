@@ -200,6 +200,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
       modal.find('.modal-body #cat_id').val(catid)
     })
 
+    $('#addressModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var address = button.data('address') 
+      var country = button.data('country')
+      var city = button.data('city')
+      var modal = $(this)
+            
+      modal.find('.modal-body #address1').val(address)
+      modal.find('.modal-body #country').val(country)
+      modal.find('.modal-body #city').val(city)
+    })    
+
 
   });
 </script>

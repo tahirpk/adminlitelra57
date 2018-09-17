@@ -131,7 +131,7 @@
 						$address1=$row->address1;
 					}
 			?>
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" data-country="{{$customer->country}}" data-address="{{$customer->address}}" >Add Address</button>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addressModal" data-country="{{$customer->country}}" data-city="{{$city}}" data-address="{{$customer->address}}" >Add Address</button>
 			
 		</div>
 		</div>
@@ -151,7 +151,7 @@
 <!-- Address change modal -->
 
 
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
     	<div class="modal-header">
@@ -161,6 +161,7 @@
 	    </button>
 	  </div>
 		<form class="mt-2">
+			<div class="modal-body">
 			<div class="form-group row">
 			<label for="address1" class="col-sm-2 ml-2 col-form-label">address1</label>
 			<div class="col-sm-8">
@@ -217,7 +218,9 @@
 			    <button type="submit" class="btn btn-primary">Save</button>
 			  </div>
 			</div>
+		</div>
 		</form>
+
       
     </div>
   </div>
